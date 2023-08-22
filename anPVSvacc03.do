@@ -1,3 +1,4 @@
+
 * Analysis: Health system quality and COVID vaccination in 14 countries
 * Created by C.Arsenault, April 2023
 * Models 4, 5, and 6 Confidence in health system and goverment 
@@ -171,7 +172,21 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy  Kenya LaoPDR Mexico
 	putexcel B`row'= matrix(b), rownames 
 	local row = `row' + 9
 	}
-
+	
+* META ANALYSIS - by covid severity groups
+	local row = 1
+	
+	putexcel set "$user/$analysis/pooled estimates_covid sever.xlsx", sheet("national system")  modify
+	foreach v in conf_getafford vconf_opinion vgcovid_manage  {
+	
+		metan lnB lnF lnG if A=="`v'" , by(covidgroup) ///
+				eform nograph  label(namevar=country) effect(aOR)
+				 
+	putexcel A`row'="`v'"
+	matrix b= r(bystats)
+	putexcel B`row'= matrix(b), rownames 
+	local row = `row' + 9
+	}
 /*-----------------------------------------------------------------------------*
 *SENSITIVITY ANALYSIS at least 1 dose in low-supply countries
 * SUPPLEMENTAL MATERIALS 
