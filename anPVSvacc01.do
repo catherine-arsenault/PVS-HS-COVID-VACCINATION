@@ -156,7 +156,7 @@ restore
 	putexcel set "$user/$analysis/pooled estimates.xlsx", sheet("utilization")  modify
 	foreach v in 1-2visits  3-4visits 5ormorevisits {
 	
-		metan lnB lnF lnG if A=="`v'" , by(inc_group) ///
+		metan lnB lnF lnG if A=="`v'" , by(inc_group) random ///
 				eform nograph  label(namevar=country) effect(aOR) 
 	putexcel A`row'="`v'"
 	matrix b= r(bystats)
@@ -169,7 +169,7 @@ restore
 	putexcel set "$user/$analysis/pooled estimates.xlsx", sheet("utilization_all")  modify
 	foreach v in 1-2visits  3-4visits 5ormorevisits {
 	
-		metan lnB lnF lnG if A=="`v'"  ,  ///
+		metan lnB lnF lnG if A=="`v'"  ,  random ///
 				eform nograph  label(namevar=country) effect(aOR) 
 	putexcel A`row'="`v'"
 	matrix b= r(ovstats)
@@ -183,7 +183,7 @@ local row = 1
 	putexcel set "$user/$analysis/pooled estimates_covid sever.xlsx", sheet("utilization")  modify
 	foreach v in 1-2visits  3-4visits 5ormorevisits {
 	
-		metan lnB lnF lnG if A=="`v'" , by(covidgroup) ///
+		metan lnB lnF lnG if A=="`v'" , by(covidgroup) random ///
 				eform nograph  label(namevar=country) effect(aOR) 
 	putexcel A`row'="`v'"
 	matrix b= r(bystats)
