@@ -196,7 +196,7 @@ restore
 	putexcel set "$user/$analysis/pooled estimates.xlsx", sheet("hs_competence")  modify
 	foreach v in usual_source  preventive unmet_need  {
 	
-		metan lnB lnF lnG if A=="`v'" , by(inc_group) ///
+		metan lnB lnF lnG if A=="`v'" , by(inc_group) random ///
 				eform nograph  label(namevar=country) effect(aOR)
 				 
 	putexcel A`row'="`v'"
@@ -210,7 +210,7 @@ restore
 	putexcel set "$user/$analysis/pooled estimates.xlsx", sheet("qualowncare")  modify
 	foreach v in vgusual_quality discrim mistake  {
 	
-		metan lnB lnF lnG if A=="`v'" , by(inc_group) ///
+		metan lnB lnF lnG if A=="`v'" , by(inc_group) random ///
 				eform nograph  label(namevar=country) effect(aOR)
 				 
 	putexcel A`row'="`v'"
@@ -225,7 +225,7 @@ restore
 	putexcel set "$user/$analysis/pooled estimates.xlsx", sheet("hs_competence_all")  modify
 	foreach v in usual_source preventive unmet_need  {
 	
-		metan lnB lnF lnG if A=="`v'" ,  ///
+		metan lnB lnF lnG if A=="`v'" ,  random ///
 				eform nograph  label(namevar=country) effect(aOR)
 				 
 	putexcel A`row'="`v'"
@@ -239,7 +239,7 @@ restore
 	putexcel set "$user/$analysis/pooled estimates.xlsx", sheet("qualowncare_all")  modify
 	foreach v in vgusual_quality discrim mistake  {
 	
-		metan lnB lnF lnG if A=="`v'" ,  ///
+		metan lnB lnF lnG if A=="`v'" ,  random ///
 				eform nograph  label(namevar=country) effect(aOR)
 				 
 	putexcel A`row'="`v'"
@@ -254,7 +254,7 @@ restore
 	putexcel set "$user/$analysis/pooled estimates_covid sever.xlsx", sheet("hs_competence")  modify
 	foreach v in usual_source  preventive unmet_need  {
 	
-		metan lnB lnF lnG if A=="`v'" , by(covidgroup) ///
+		metan lnB lnF lnG if A=="`v'" , by(covidgroup) random ///
 				eform nograph  label(namevar=country) effect(aOR)
 				 
 	putexcel A`row'="`v'"
@@ -268,7 +268,7 @@ restore
 	putexcel set "$user/$analysis/pooled estimates_covid sever.xlsx", sheet("qualowncare")  modify
 	foreach v in vgusual_quality discrim mistake  {
 	
-		metan lnB lnF lnG if A=="`v'" , by(covidgroup) ///
+		metan lnB lnF lnG if A=="`v'" , by(covidgroup) random ///
 				eform nograph  label(namevar=country) effect(aOR)
 				 
 	putexcel A`row'="`v'"
