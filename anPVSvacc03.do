@@ -152,7 +152,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy  Kenya LaoPDR Mexico
 	putexcel set "$user/$analysis/pooled estimates.xlsx", sheet("national system")  modify
 	foreach v in conf_getafford vconf_opinion vgcovid_manage  {
 	
-		metan lnB lnF lnG if A=="`v'" , by(inc_group) ///
+		metan lnB lnF lnG if A=="`v'" , by(inc_group) random ///
 				eform nograph  label(namevar=country) effect(aOR)
 				 
 	putexcel A`row'="`v'"
@@ -165,7 +165,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy  Kenya LaoPDR Mexico
 	putexcel set "$user/$analysis/pooled estimates.xlsx", sheet("national system_all")  modify
 	foreach v in conf_getafford vconf_opinion vgcovid_manage  {
 	
-		metan lnB lnF lnG if A=="`v'" ,  ///
+		metan lnB lnF lnG if A=="`v'" ,  random ///
 				eform nograph  label(namevar=country) effect(aOR)			 
 	putexcel A`row'="`v'"
 	matrix b= r(ovstats)
@@ -179,7 +179,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy  Kenya LaoPDR Mexico
 	putexcel set "$user/$analysis/pooled estimates_covid sever.xlsx", sheet("national system")  modify
 	foreach v in conf_getafford vconf_opinion vgcovid_manage  {
 	
-		metan lnB lnF lnG if A=="`v'" , by(covidgroup) ///
+		metan lnB lnF lnG if A=="`v'" , by(covidgroup) random  ///
 				eform nograph  label(namevar=country) effect(aOR)
 				 
 	putexcel A`row'="`v'"
