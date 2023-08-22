@@ -1,9 +1,9 @@
 
 * Analysis: Health system quality and COVID vaccination in 14 countries
 * Created by C.Arsenault, April 2023
-* Figure 1, Table 1, and health care utilization model 
+* Figure 1, Table 1, and Model 1 health care utilization 
 
-********************************************************************************
+*------------------------------------------------------------------------------*
 global user "/Users/catherine.arsenault/Dropbox"
 global data "SPH Kruk QuEST Network/Core Research/People's Voice Survey/PVS External/Data/Multi-country/02 recoded data"
 global analysis "SPH Kruk Active Projects/Vaccine hesitancy/Analyses/Paper 7 vaccination/Results"
@@ -13,10 +13,10 @@ u "$user/$analysis/pvs_vacc_analysis.dta", clear
 *net install collin
 
 set more off
-********************************************************************************
+*------------------------------------------------------------------------------*
 * FIGURE 1 COVID DOSES
 ta nb_doses c  [aw=weight] , nofreq col
-********************************************************************************
+*------------------------------------------------------------------------------*
 * DESCRIPTIVE TABLES
 * TABLE 1	
 summtab, catvars(visits4 usual_source  preventive unmet_need  ///
@@ -29,8 +29,8 @@ summtab, catvars(health_chronic ever_covid post_secondary high_income female urb
 		         contvars(age) by(country) mean meanrow catrow wts(weight) ///
 		         replace excel excelname(supptable demog)  				
 
-********************************************************************************
-* COUNTRY-SPECIFIC REGRESSIONS - UTILIZATION
+*------------------------------------------------------------------------------*
+* COUNTRY-SPECIFIC REGRESSIONS - MODEL 1: UTILIZATION
 foreach x in  Ethiopia Kenya LaoPDR Mexico Peru SouthAfrica USA UK {
 
 	putexcel set "$user/$analysis/utilization model.xlsx", sheet("`x'")  modify
@@ -149,7 +149,7 @@ preserve
 				title("Had 5 or more visits in last year", size(medium))
 		graph export "$user/$analysis/5+ visits.pdf", replace 	
 restore 
-	
+*------------------------------------------------------------------------------*	
 * META ANALYSIS - BY INCOME GROUPS
 	local row = 1
 	
@@ -178,7 +178,6 @@ restore
 	}
 	
 * META ANALYSIS - BY COVID DEATHS
-
 local row = 1
 	
 	putexcel set "$user/$analysis/pooled estimates_covid sever.xlsx", sheet("utilization")  modify

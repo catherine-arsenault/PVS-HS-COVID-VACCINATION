@@ -8,7 +8,7 @@ global analysis "SPH Kruk Active Projects/Vaccine hesitancy/Analyses/Paper 7 vac
 
 clear all
 set more off
-
+*------------------------------------------------------------------------------*
 u "$user/$data/pvs_all_countries.dta", clear
 
 decode country, gen(c)

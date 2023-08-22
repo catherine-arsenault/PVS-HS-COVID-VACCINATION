@@ -1,17 +1,17 @@
 
 * Analysis: Health system quality and COVID vaccination in 14 countries
 * Created by C.Arsenault, April 2023
-* Health system competence, perceived quality and user experience
+* Model 2 Health system competence and Model 3 perceived quality and user experience
 
-********************************************************************************
+*------------------------------------------------------------------------------*
 global user "/Users/catherine.arsenault/Dropbox"
 global data "SPH Kruk QuEST Network/Core Research/People's Voice Survey/PVS External/Data/Multi-country/02 recoded data"
 global analysis "SPH Kruk Active Projects/Vaccine hesitancy/Analyses/Paper 7 vaccination/Results"
 
 u "$user/$analysis/pvs_vacc_analysis.dta", clear
 set more off
-********************************************************************************
-* COUNTRY-SPECIFIC  REGRESSIONS - HEALTH SYSTEM COMPETENCE, PERCEIVED QUALITY & USER EXPERIENCE
+*------------------------------------------------------------------------------*
+* COUNTRY-SPECIFIC  REGRESSIONS - MODELS 2 & 3 HEALTH SYSTEM COMPETENCE, PERCEIVED QUALITY & USER EXPERIENCE
 
 foreach x in  Ethiopia  Kenya LaoPDR Mexico Peru SouthAfrica USA UK {
 	putexcel set "$user/$analysis/country-specific regressions comp qual.xlsx", sheet("`x'")  modify	
@@ -19,6 +19,7 @@ foreach x in  Ethiopia  Kenya LaoPDR Mexico Peru SouthAfrica USA UK {
 				age2 health_chronic ever_covid post_secondary ///
 				high_income female urban minority if c=="`x'", vce(robust) // countries with minority			
 	putexcel (A1) = etable	
+	
 	logistic fullvax vgusual_quality discrim mistake  ///
 				age2 health_chronic ever_covid post_secondary ///
 				high_income female urban  minority if c=="`x'", vce(robust)		
@@ -31,6 +32,7 @@ foreach x in Argentina Colombia India Korea Uruguay Italy {
 				age2 health_chronic ever_covid post_secondary ///
 				high_income female urban  if c=="`x'", vce(robust) // countries without minority		
 	putexcel (A1) = etable	
+	
 	logistic fullvax vgusual_quality discrim mistake  ///
 				age2 health_chronic ever_covid post_secondary ///
 				high_income female urban  if c=="`x'", vce(robust)		
@@ -92,9 +94,9 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy Kenya LaoPDR Mexico 
 *Supplemental table 3
 	export excel using "$user/$analysis/supp table hs comp qual.xlsx", sheet(Sheet1) firstrow(variable) replace 
 	
-********************************************************************************
+*------------------------------------------------------------------------------*
 * GRAPHS SYSTEM COMPETENCE
-	preserve 
+preserve 
 	replace UCL=3.4 if UCL==4.543549 // Italy outlier UCL
 		twoway (rspike UCL LCL co if A=="usual_source" & co>=1 & co<=4, lwidth(medthick) lcolor(pink)) ///
 			   (scatter aOR co if A=="usual_source" & co>=1 & co<=4, msize(medsmall) mcolor(pink))  ///
@@ -186,8 +188,8 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy Kenya LaoPDR Mexico 
 				title("Believes medical mistake was made", size(med))
 		 
 		graph export "$user/$analysis/mistake.pdf", replace 
-	restore 
-	
+restore 
+*------------------------------------------------------------------------------*
 * META ANALYSIS - BY INCOME GROUPS
 	local row = 1
 	
@@ -217,7 +219,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy Kenya LaoPDR Mexico 
 	local row = `row' + 9
 	}
 
-	* META ANALYSIS - all countries
+	* META ANALYSIS - ALL COUNTRIES
 	local row = 1
 	
 	putexcel set "$user/$analysis/pooled estimates.xlsx", sheet("hs_competence_all")  modify

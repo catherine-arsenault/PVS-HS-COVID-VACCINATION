@@ -1,15 +1,15 @@
 * Analysis: Health system quality and COVID vaccination in 14 countries
 * Created by C.Arsenault, April 2023
-* Confidence in health system and goverment models
-********************************************************************************
+* Models 4, 5, and 6 Confidence in health system and goverment 
+*------------------------------------------------------------------------------*
 global user "/Users/catherine.arsenault/Dropbox"
 global data "SPH Kruk QuEST Network/Core Research/People's Voice Survey/PVS External/Data/Multi-country/02 recoded data"
 global analysis "SPH Kruk Active Projects/Vaccine hesitancy/Analyses/Paper 7 vaccination/Results"
 
 u "$user/$analysis/pvs_vacc_analysis.dta", clear
 set more off
-********************************************************************************
-* COUNTRY-SPECIFIC  REGRESSIONS - CONFIDENCE IN HEALTH SYSTEM AND GOVERNEMENT
+*------------------------------------------------------------------------------*
+* COUNTRY-SPECIFIC  REGRESSIONS - MODELS 4, 5, AND 6 CONFIDENCE IN HEALTH SYSTEM AND GOVERNEMENT
 
 foreach x in  Ethiopia Kenya LaoPDR Mexico Peru SouthAfrica USA UK {
 	putexcel set "$user/$analysis/conf models.xlsx", sheet("`x'")  modify	
@@ -42,7 +42,7 @@ foreach x in Argentina Colombia India Korea Uruguay Italy {
 				high_income female urban  if c=="`x'", vce(robust) 
 	putexcel (A29) = etable	
 	}
-* Import estimates
+* Importing estimates
 import excel using "$user/$analysis/conf models.xlsx", sheet(Ethiopia) firstrow clear
 	drop if B=="" | B=="Odds ratio"
 	gen country="Ethiopia"
@@ -97,7 +97,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy  Kenya LaoPDR Mexico
 *Supplemental table 
 	export excel using "$user/$analysis/supp table conf.xlsx", sheet(Sheet1) firstrow(variable) replace 
 		
-********************************************************************************
+*------------------------------------------------------------------------------*
 * GRAPHS CONFIDENCE 
 	twoway (rspike UCL LCL co if A=="conf_getafford" & co>=1 & co<=4, lwidth(medthick) lcolor(pink)) ///
 		   (scatter aOR co if A=="conf_getafford" & co>=1 & co<=4, msize(medsmall) mcolor(pink))  ///
@@ -144,7 +144,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy  Kenya LaoPDR Mexico
 			"pandemic as very good or excellent" , size(medi))
 	 
 	graph export "$user/$analysis/vgcovid_manage.pdf", replace 
-	
+*------------------------------------------------------------------------------*	
 * META ANALYSIS - by income groups
 	local row = 1
 	
@@ -172,7 +172,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy  Kenya LaoPDR Mexico
 	local row = `row' + 9
 	}
 
-/********************************************************************************
+/*-----------------------------------------------------------------------------*
 *SENSITIVITY ANALYSIS at least 1 dose in low-supply countries
 * SUPPLEMENTAL MATERIALS 
 
@@ -224,7 +224,7 @@ foreach x in  Kenya SouthAfrica  {
 
 	export excel using "$user/$analysis/supp table 4_one dose.xlsx", sheet(Sheet1) firstrow(variable) replace 
 
-/********************************************************************************
+/*-----------------------------------------------------------------------------*
 * FOREST PLOTS - DEMOGRAPHICS AND HEALTH STATUS
 import excel using  "$user/$analysis/Utilization Confidence regressions.xlsx", sheet(Colombia) firstrow clear
 	drop if B==""
@@ -268,4 +268,4 @@ metan lnB lnF lnG , ///
 		graphregion(color(white)) forestplot(spacing(1.1)  ciopts(lcolor(navy) lwidth(vthin)) ///
 		pointopts (msize(tiny) mcolor(navy))) 
 	graph export "$user/$analysis/FP demographics2.pdf", replace 
-********************************************************************************
+
