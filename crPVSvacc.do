@@ -1,6 +1,7 @@
-* People's Voice Survey+ vaccination
-* Created Feb 23, 2023
-* C.Arsenault
+
+* Analysis: Health system quality and COVID vaccination in 14 countries
+* Created by C.Arsenault, Feb 2023
+* Variables creation
 
 global user "/Users/catherine.arsenault/Dropbox"
 global data "SPH Kruk QuEST Network/Core Research/People's Voice Survey/PVS External/Data/Multi-country (shared)"
