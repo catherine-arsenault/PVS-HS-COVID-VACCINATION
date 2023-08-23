@@ -1,8 +1,11 @@
 
 * Analysis: Health system quality and COVID vaccination in 14 countries
 * Created by C.Arsenault, Feb 2023
-* Variables creation
+*------------------------------------------------------------------------------*
 
+* This do file creates the variables used for the analysis
+
+*------------------------------------------------------------------------------*
 global user "/Users/catherine.arsenault/Dropbox"
 global data "SPH Kruk QuEST Network/Core Research/People's Voice Survey/PVS External/Data/Multi-country (shared)"
 global analysis "SPH Kruk Active Projects/Vaccine hesitancy/Analyses/Paper 7 vaccination/Results"

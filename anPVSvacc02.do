@@ -10,7 +10,16 @@ global analysis "SPH Kruk Active Projects/Vaccine hesitancy/Analyses/Paper 7 vac
 
 u "$user/$analysis/pvs_vacc_analysis.dta", clear
 set more off
-*------------------------------------------------------------------------------*
+/*------------------------------------------------------------------------------*
+
+This dofile includes the STATA code for:
+	 -  Performing the regression analyses for Model 2 and 3 
+	 -  Creating the graphs in figure 2B and 3
+	 -  Creating the supplemental tables 
+	 -  Performing the meta-analysis for the pooled estimates included in table 2 & supplemental materials
+	 
+*------------------------------------------------------------------------------*/
+
 * COUNTRY-SPECIFIC  REGRESSIONS - MODELS 2 & 3 HEALTH SYSTEM COMPETENCE, PERCEIVED QUALITY & USER EXPERIENCE
 
 foreach x in  Ethiopia  Kenya LaoPDR Mexico Peru SouthAfrica USA UK {

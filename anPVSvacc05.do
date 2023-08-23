@@ -11,8 +11,12 @@ u "$user/$analysis/pvs_vacc_analysis.dta", clear
 cd "$user/$analysis/"
 
 set more off
+/*------------------------------------------------------------------------------*
 
-*------------------------------------------------------------------------------*
+This dofile includes the STATA code for:
+		- Checking for multicollinearity among the independent variables
+
+*------------------------------------------------------------------------------*/
 * UTILIZATION MODEL
 foreach x in  Ethiopia Kenya LaoPDR Mexico Peru SouthAfrica USA UK {
 

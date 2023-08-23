@@ -1,9 +1,16 @@
 
 * Analysis: Health system quality and COVID vaccination in 14 countries
 * Created by C.Arsenault, April 2023
-* Figure 1, Table 1, and Model 1 health care utilization 
+/*------------------------------------------------------------------------------*
 
-*------------------------------------------------------------------------------*
+This dofile includes the STATA code for:
+	 -  Creating Figure 1, and Table 1
+	 -  Performing the regression analyses for Model 1 (health care utilization) 
+	 -  Creating the graphs in figure 2A
+	 -  Creating the supplemental tables 
+	 -  Performing the meta-analysis for the pooled estimates included in table 2 & supplemental materials
+
+*------------------------------------------------------------------------------*/
 global user "/Users/catherine.arsenault/Dropbox"
 global data "SPH Kruk QuEST Network/Core Research/People's Voice Survey/PVS External/Data/Multi-country/02 recoded data"
 global analysis "SPH Kruk Active Projects/Vaccine hesitancy/Analyses/Paper 7 vaccination/Results"

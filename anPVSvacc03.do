@@ -2,14 +2,23 @@
 * Analysis: Health system quality and COVID vaccination in 14 countries
 * Created by C.Arsenault, April 2023
 * Models 4, 5, and 6 Confidence in health system and goverment 
-*------------------------------------------------------------------------------*
+
 global user "/Users/catherine.arsenault/Dropbox"
 global data "SPH Kruk QuEST Network/Core Research/People's Voice Survey/PVS External/Data/Multi-country/02 recoded data"
 global analysis "SPH Kruk Active Projects/Vaccine hesitancy/Analyses/Paper 7 vaccination/Results"
 
 u "$user/$analysis/pvs_vacc_analysis.dta", clear
 set more off
-*------------------------------------------------------------------------------*
+/*------------------------------------------------------------------------------*
+
+This dofile includes the STATA code for:
+	 -  Performing the regression analyses for Models 4, 5 and 6
+	 -  Creating the graphs in figure 4
+	 -  Creating the supplemental tables 
+	 -  Performing the meta-analysis for the pooled estimates included in table 2 & supplemental materials
+	 
+*------------------------------------------------------------------------------*/
+
 * COUNTRY-SPECIFIC  REGRESSIONS - MODELS 4, 5, AND 6 CONFIDENCE IN HEALTH SYSTEM AND GOVERNEMENT
 
 foreach x in  Ethiopia Kenya LaoPDR Mexico Peru SouthAfrica USA UK {

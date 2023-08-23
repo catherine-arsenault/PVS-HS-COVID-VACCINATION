@@ -1,16 +1,21 @@
 * Analysis: Health system quality and COVID vaccination in 14 countries
 * Created by C.Arsenault, April 2023
 
-* SENSITIVITY ANALYSIS: 2+ DOSES
 
-********************************************************************************
 global user "/Users/catherine.arsenault/Dropbox"
 global data "SPH Kruk QuEST Network/Core Research/People's Voice Survey/PVS External/Data/Multi-country/02 recoded data"
 global analysis "SPH Kruk Active Projects/Vaccine hesitancy/Analyses/Paper 7 vaccination/Results"
 
 u "$user/$analysis/pvs_vacc_analysis.dta", clear
 set more off
-********************************************************************************
+/*------------------------------------------------------------------------------*
+
+This dofile includes the STATA code for:
+		- Performing the sensitivity analysis looking at 2 doses of a COVID vaccine (instead of 3)
+
+*------------------------------------------------------------------------------*/
+
+
 * COUNTRY-SPECIFIC REGRESSIONS - UTILIZATION
 foreach x in  Ethiopia Kenya LaoPDR Mexico Peru SouthAfrica USA UK {
 	putexcel set "$user/$analysis/utilization model2d.xlsx", sheet("`x'")  modify
