@@ -8,6 +8,7 @@ global analysis "SPH Kruk Active Projects/Vaccine hesitancy/Analyses/Paper 7 vac
 
 u "$user/$analysis/pvs_vacc_analysis.dta", clear
 set more off
+
 /*------------------------------------------------------------------------------*
 
 This dofile includes the STATA code for:
@@ -15,8 +16,8 @@ This dofile includes the STATA code for:
 
 *------------------------------------------------------------------------------*/
 
-
 * COUNTRY-SPECIFIC REGRESSIONS - UTILIZATION
+
 foreach x in  Ethiopia Kenya LaoPDR Mexico Peru SouthAfrica USA UK {
 	putexcel set "$user/$analysis/utilization model2d.xlsx", sheet("`x'")  modify
 	logistic twodoses i.visits4 ///
@@ -63,7 +64,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy  Kenya LaoPDR Mexico
 local row = 1
 	putexcel set "$user/$analysis/pooled estimates2d.xlsx", sheet("utilization")  modify
 	foreach v in 1-2visits  3-4visits 5ormorevisits {
-		metan lnB lnF lnG if A=="`v'"  , by(inc_group) ///
+		metan lnB lnF lnG if A=="`v'"  , by(inc_group) random ///
 				eform nograph  label(namevar=country) effect(aOR) 
 	putexcel A`row'="`v'"
 	matrix b= r(bystats)
@@ -77,15 +78,16 @@ local row = 1
 	putexcel set "$user/$analysis/pooled estimates2d.xlsx", sheet("utilization_all")  modify
 	foreach v in 1-2visits  3-4visits 5ormorevisits {
 	
-		metan lnB lnF lnG if A=="`v'"  ,  ///
+		metan lnB lnF lnG if A=="`v'"  ,  random ///
 				eform nograph  label(namevar=country) effect(aOR) 
 	putexcel A`row'="`v'"
 	matrix b= r(ovstats)
 	putexcel B`row'= matrix(b), rownames 
 	local row = `row' + 9
 	}
-********************************************************************************
+*------------------------------------------------------------------------------*
 * COUNTRY-SPECIFIC  REGRESSIONS - HEALTH SYSTEM COMPETENCE, PERCEIVED QUALITY & USER EXPERIENCE
+
 u "$user/$analysis/pvs_vacc_analysis.dta", clear
 foreach x in  Ethiopia  Kenya LaoPDR Mexico Peru SouthAfrica USA UK {
 	putexcel set "$user/$analysis/country-specific regressions comp qual2d.xlsx", sheet("`x'")  modify	
@@ -144,7 +146,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy Kenya LaoPDR Mexico 
 	local row = 1
 	putexcel set "$user/$analysis/pooled estimates2d.xlsx", sheet("hs_competence")  modify
 	foreach v in usual_source  preventive unmet_need  {
-		metan lnB lnF lnG if A=="`v'" , by(inc_group) ///
+		metan lnB lnF lnG if A=="`v'" , by(inc_group) random ///
 				eform nograph  label(namevar=country) effect(aOR)		 
 	putexcel A`row'="`v'"
 	matrix b= r(bystats)
@@ -154,7 +156,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy Kenya LaoPDR Mexico 
 	local row = 1
 	putexcel set "$user/$analysis/pooled estimates2d.xlsx", sheet("qualowncare")  modify
 	foreach v in vgusual_quality discrim mistake  {
-		metan lnB lnF lnG if A=="`v'" , by(inc_group) ///
+		metan lnB lnF lnG if A=="`v'" , by(inc_group) random  ///
 				eform nograph  label(namevar=country) effect(aOR)
 	putexcel A`row'="`v'"
 	matrix b= r(bystats)
@@ -166,7 +168,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy Kenya LaoPDR Mexico 
 	local row = 1
 	putexcel set "$user/$analysis/pooled estimates2d.xlsx", sheet("hs_competence_all")  modify
 	foreach v in usual_source preventive unmet_need  {
-		metan lnB lnF lnG if A=="`v'" ,  ///
+		metan lnB lnF lnG if A=="`v'" , random ///
 				eform nograph  label(namevar=country) effect(aOR) 
 	putexcel A`row'="`v'"
 	matrix b= r(ovstats)
@@ -176,7 +178,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy Kenya LaoPDR Mexico 
 	local row = 1
 	putexcel set "$user/$analysis/pooled estimates2d.xlsx", sheet("qualowncare_all")  modify
 	foreach v in vgusual_quality discrim mistake  {
-		metan lnB lnF lnG if A=="`v'" ,  ///
+		metan lnB lnF lnG if A=="`v'" ,  random ///
 				eform nograph  label(namevar=country) effect(aOR)		 
 	putexcel A`row'="`v'"
 	matrix b= r(ovstats)
@@ -247,7 +249,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy  Kenya LaoPDR Mexico
 	local row = 1
 	putexcel set "$user/$analysis/pooled estimates2d.xlsx", sheet("national system")  modify
 	foreach v in conf_getafford vconf_opinion vgcovid_manage  {
-		metan lnB lnF lnG if A=="`v'" , by(inc_group) ///
+		metan lnB lnF lnG if A=="`v'" , by(inc_group) random ///
 				eform nograph  label(namevar=country) effect(aOR)
 	putexcel A`row'="`v'"
 	matrix b= r(bystats)
@@ -260,7 +262,7 @@ foreach x in  Argentina Colombia India Korea  Uruguay Italy  Kenya LaoPDR Mexico
 	
 	putexcel set "$user/$analysis/pooled estimates2d.xlsx", sheet("national system_all")  modify
 	foreach v in conf_getafford vconf_opinion vgcovid_manage  {
-		metan lnB lnF lnG if A=="`v'" ,  ///
+		metan lnB lnF lnG if A=="`v'" , random ///
 				eform nograph  label(namevar=country) effect(aOR)			 
 	putexcel A`row'="`v'"
 	matrix b= r(ovstats)

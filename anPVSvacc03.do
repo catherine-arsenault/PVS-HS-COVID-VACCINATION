@@ -52,6 +52,7 @@ foreach x in Argentina Colombia India Korea Uruguay Italy {
 				high_income female urban  if c=="`x'", vce(robust) 
 	putexcel (A29) = etable	
 	}
+	
 * Importing estimates
 import excel using "$user/$analysis/conf models.xlsx", sheet(Ethiopia) firstrow clear
 	drop if B=="" | B=="Odds ratio"

@@ -14,7 +14,8 @@ set more off
 /*------------------------------------------------------------------------------*
 
 This dofile includes the STATA code for:
-		- Checking for multicollinearity among the independent variables
+
+		- Checking for multicollinearity among the independent variables using VIF
 
 *------------------------------------------------------------------------------*/
 * UTILIZATION MODEL

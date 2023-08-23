@@ -17,7 +17,6 @@ global analysis "SPH Kruk Active Projects/Vaccine hesitancy/Analyses/Paper 7 vac
 
 cd "$user/$analysis/"
 u "$user/$analysis/pvs_vacc_analysis.dta", clear
-*net install collin
 
 set more off
 *------------------------------------------------------------------------------*
@@ -31,7 +30,7 @@ summtab, catvars(visits4 usual_source  preventive unmet_need  ///
 				 vconf_opinion vgcovid_manage) contvars(visits_total) ///
 				 by(country) mean meanrow catrow wts(weight) ///
 		         replace excel excelname(Table_1)  	
-* SUPP TABLE 2	
+* SUPPLEMENTAL TABLE 4	
 summtab, catvars(health_chronic ever_covid post_secondary high_income female urban minority) ///
 		         contvars(age) by(country) mean meanrow catrow wts(weight) ///
 		         replace excel excelname(supptable demog)  				
